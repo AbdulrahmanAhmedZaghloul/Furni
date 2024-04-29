@@ -1,25 +1,64 @@
-let currentValue =0 ;
+"use strict";
 
-export function minus() {
-    for (let i = 0; i < 1; i++) {
-        currentValue--;
-    }
-    document.getElementById('result').innerText = currentValue;
-    if (currentValue < 0) {
-        document.getElementById('result').innerText = "1";
-    }
-    console.log("jkljjkl");
+const clickMinus = document.getElementById('clickMinus');
+const clickPlus = document.getElementById('clickplus');
+let truenumber = document.getElementById("truenumber");
+const result = document.getElementById('result');
+const totalNumber = document.getElementById('totalnumber');
+const subtotal = document.getElementById('subtotal');
+const closed = document.getElementById('close');
+const tbodyx = document.getElementById('tbodyx');
+let price = 49.00;
+let quantity = 1;
+
+function updateTotal() {
+    totalNumber.textContent = (price * quantity).toFixed(2);
+    subtotal.textContent = (price * quantity).toFixed(2);
 }
 
+clickPlus.addEventListener('click', () => {
+    quantity++;
+    result.textContent = quantity;
+    truenumber.textContent = quantity;
+    updateTotal();
+});
 
-export function plus() {
-    for (let i = 0; i < 1; i++) {
-        currentValue++;
+clickMinus.addEventListener('click', () => {
+    if (quantity > 1) {
+        quantity--;
+        result.textContent = quantity;
+        truenumber.textContent = quantity;
+        updateTotal();
     }
-    document.getElementById('result').innerText = currentValue;
-    
-    console.log("2131");
-}
+});
+ closed.addEventListener("click",()=>{
+    $("#tbodyx").css("display", "none");
+    subtotal.textContent = "0"
 
-addEventListener("click" ,plus)
+});
 
+let maintop = $("main").offset().top;
+$("#arrowUp").click(function () {
+    $("html,body").animate({ scrollTop: 0 }, 500);
+});
+
+$(document).ready(function () {
+    $("#loed").fadeToggle(1000, function () {
+        $("body").css("overflow", "auto");
+        $("#loed").remove()
+    });
+
+    $(window).scroll(() => {
+        let scrolltop = $(window).scrollTop();
+        if (scrolltop < maintop + 200) {
+            $("nav").css('backgroundColor', '#3b5d50');
+            $("#arrowUp").hide(500);
+
+            // $().
+        }
+        else {
+            $("nav").css('backgroundColor', 'transparent');
+            $("#arrowUp").show(500);
+        }
+    });
+});
